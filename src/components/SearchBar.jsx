@@ -7,12 +7,15 @@ export default function SearchBar(props) {
       const {value} = event.target;
       // console.log(value);
       setId(value);
+      //creamos un estado id, que al recibir el evento 
+      //setea el estado con el nuevo valor del input
    }
 
    const handleClick = event => {
       event.preventDefault();
       props.onSearch(id);
       setId("");
+      // la funcion handleClick recibe el evento y ejecuta  el onSearch y  setea el valor del input a un string vacio
    }
    //* Traer Character Random
    const handleRandom = () => {

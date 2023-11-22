@@ -1,11 +1,13 @@
 import './App.css';
+import { useState, useEffect } from 'react';
+import { removeFav } from './redux/actions.js';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Cards from './components/Cards.jsx'
 import Nav from './components/Nav.jsx'
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import About from './components/About.jsx'
 import Detail from './components/Detail.jsx'
+import Favorites from './components/Favorites.jsx';
 import Form from './components/Form.jsx';
 import NotFound from './components/NotFound.jsx'
 
@@ -44,7 +46,10 @@ function App() {
    }
 
    const onClose = id => {
+      //recibo la funcion con id como param
       setCharacters(characters.filter(char => char.id !== Number(id)))
+      dispatchEvent(removeFav(id))
+      //modificamos el estado, filtrando los char que sean distintos del id que esta recibiendo convertido en number
    }
 
    //* Login
@@ -93,6 +98,11 @@ function App() {
                path="/detail/:id"
                element={<Detail />}
             />
+            <Route
+               path="/favorites"
+               element={<Favorites onClose={onClose}/>}
+            />
+
             <Route
                path="*"
                element={<NotFound />}

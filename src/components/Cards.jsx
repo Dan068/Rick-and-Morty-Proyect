@@ -6,13 +6,17 @@ export default function Cards({ characters, onClose }) {
    //* characters = [ {R}, {M}, {B}, {S} ]
    return (
       <div
+      
          style={{
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "space-evenly"
          }}
       >
+
          {
+            !characters.length
+            ?<h2>Por favor ingrese un id..</h2>:
             characters.map(character => (
                <Card
                   key={character.id}
